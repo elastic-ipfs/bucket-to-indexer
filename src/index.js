@@ -79,7 +79,7 @@ async function publishToSQS(
  * @param {string} arg.s3.bucket.name - s3 bucket name
  * @param {string} arg.s3.object.key - s3 key name
  * @param {number} arg.s3.object.size - object size in bytes
- * @param {Date} arg.startTime - time of IndexerNotified event
+ * @param {Date} [arg.startTime] - time of IndexerNotified event
  */
 function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
   const event = {
