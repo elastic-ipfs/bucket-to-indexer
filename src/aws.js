@@ -9,7 +9,7 @@
  * @returns {ParsedTopic}
  */
 function parseTopic(topicArn) {
-  const pattern = /arn:aws:sns:([^:]*)/i
+  const pattern = /^arn:aws:sns:([^:]*)/i
   const region = topicArn.match(pattern)?.[1]
   return { region }
 }

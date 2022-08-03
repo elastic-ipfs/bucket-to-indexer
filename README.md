@@ -13,6 +13,6 @@ _Variables in bold are required._
 
 | Name                        | Default            | Description                                                                    |
 | --------------------------- | ------------------ | ------------------------------------------------------------------------------ |
-| SNS_EVENTS_TOPIC            | eventsTopic       | The SNS topic to publish message to events subscribers |
+| SNS_EVENTS_TOPIC            | eventsTopic       | The topic on which to publish elastic-ipfs events |
 | SQS_INDEXER_QUEUE_REGION    |                   | region of SQS topic to publish message to indexing subsystem                         |
 | SQS_INDEXER_QUEUE_URL       | indexerQueue      | The SQS topic to publish message to indexing subsystem                         |

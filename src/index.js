@@ -12,7 +12,7 @@ const defaultSQSClient = new SQSClient({
 /**
  * Create the main function that will handle SNS events
  * @param {object} arg
- * @param {string} arg.eventsTopic - events pubsub topic - e.g. an AWS SNS TopicArn
+ * @param {string} [arg.eventsTopic] - events pubsub topic - e.g. an AWS SNS TopicArn
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
  * @returns {import('aws-lambda').SNSHandler}
  */
@@ -75,7 +75,7 @@ async function publishToSQS(
  * @param {string} arg.s3.bucket.name - s3 bucket name
  * @param {string} arg.s3.object.key - s3 key name
  * @param {number} arg.s3.object.size - object size in bytes
- * @param {Date} arg.startTime - time of IndexerNotified event
+ * @param {Date} [arg.startTime] - time of IndexerNotified event
  */
 function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
   const event = {
@@ -90,7 +90,7 @@ function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
 /**
  * Broadcast an Elastic IPFS Event on the appropriate pubsub topic
  * @param {object} arg.event - elastic-ipfs event to publish
- * @param {string} arg.eventsTopic - topic to publish event on
+ * @param {string} [arg.eventsTopic] - topic to publish event on
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
  */
 async function emitIpfsEvent({
