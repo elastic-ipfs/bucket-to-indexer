@@ -94,7 +94,7 @@ function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
 /**
  * Broadcast an Elastic IPFS Event on the appropriate pubsub topic
  * @param {object} arg.event - elastic-ipfs event to publish
- * @param {string} arg.eventsTopic - topic to publish event on
+ * @param {string} [arg.eventsTopic] - topic to publish event on
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
  */
 async function emitIpfsEvent({
