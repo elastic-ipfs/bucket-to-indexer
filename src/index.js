@@ -4,13 +4,9 @@ const { logger: defaultLogger, serializeError } = require('./logging')
 const config = require('./config')
 const { createS3URL } = require('./s3')
 const { createClientConfig } = require('./aws')
-const {
-  SQS_INDEXER_QUEUE_URL: indexerQueue,
-  SQS_INDEXER_QUEUE_REGION: indexerQueueRegion
-} = process.env
 
 const defaultSQSClient = new SQSClient({
-  region: indexerQueueRegion
+  region: config.indexerQueueRegion
 })
 
 /**
@@ -55,9 +51,9 @@ function createBucketToIndexerLambda({
 async function publishToSQS(
   data,
   logger = defaultLogger,
-  sqsClient = defaultSQSClient
+  sqsClient = defaultSQSClient,
+  queue = config.indexerQueue ?? 'indexerQueue'
 ) {
-  const queue = indexerQueue ?? 'indexerQueue'
   try {
     logger.info(`Sending message ${data} to queue ${queue}`)
     const response = await sqsClient.send(
