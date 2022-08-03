@@ -4,11 +4,12 @@ const t = require('tap')
 const { handler, createBucketToIndexerLambda } = require('../src/index')
 const { createS3URL } = require('../src/aws')
 const { trackSQSUsages, trackSNSUsages } = require('./utils/mock')
+const config = require('../src/config')
 
 t.test('lambda handles event', async t => {
   trackSQSUsages(t)
   trackSNSUsages(t)
-  const eventsTopic = 'eventsTopicArn'
+  const eventsTopic = config.defaultEventsTopicArn
   const rand1 = Math.random().toString().slice(2)
   const s3Bucket = `${rand1}-bucket`
   const s3Key = `${rand1}-seg1/${rand1}-seg2.car`

@@ -10,6 +10,7 @@ try {
   }
   /* c8 ignore next 3 */
 } catch (e) {
+  console.debug('error requiring pino-pretty as logging destination')
   // No-op
 }
 

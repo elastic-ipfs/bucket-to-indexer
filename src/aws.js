@@ -1,3 +1,6 @@
+const utilArnParser = require('@aws-sdk/util-arn-parser')
+const { logger: defaultLogger } = require('./logging')
+
 /**
  * @typedef {object} ParsedTopic
  * @property {string|undefined} region - aws region of topic
@@ -8,9 +11,11 @@
  * @param {string} topicArn - e.g. arn:aws:sns:us-east-2:foo:topicName
  * @returns {ParsedTopic}
  */
-function parseTopic(topicArn) {
-  const pattern = /^arn:aws:sns:([^:]*)/i
-  const region = topicArn.match(pattern)?.[1]
+function parseTopic(topicArn, logger = defaultLogger.child('parseTopic')) {
+  logger.debug('parsing', { topicArn })
+  const awsParsed = utilArnParser.parse(topicArn)
+  logger.debug('parseTopic', { awsParsed, topicArn })
+  const region = awsParsed.region
   return { region }
 }
 
