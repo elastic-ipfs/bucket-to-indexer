@@ -16,7 +16,7 @@ const defaultSQSClient = new SQSClient({
 /**
  * Create the main function that will handle SNS events
  * @param {object} arg
- * @param {string} arg.eventsTopic - events pubsub topic - e.g. an AWS SNS TopicArn
+ * @param {string} [arg.eventsTopic] - events pubsub topic - e.g. an AWS SNS TopicArn
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
  * @returns {import('aws-lambda').SNSHandler}
  */
