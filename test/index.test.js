@@ -2,7 +2,7 @@
 
 const t = require('tap')
 const { handler, createBucketToIndexerLambda } = require('../src/index')
-const { createS3URL } = require('../src/s3')
+const { createS3URL } = require('../src/aws')
 const { trackSQSUsages, trackSNSUsages } = require('./utils/mock')
 
 t.test('lambda handles event', async t => {

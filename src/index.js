@@ -2,8 +2,7 @@ const { SQSClient, SendMessageCommand } = require('@aws-sdk/client-sqs')
 const { SNSClient, PublishCommand } = require('@aws-sdk/client-sns')
 const { logger: defaultLogger, serializeError } = require('./logging')
 const config = require('./config')
-const { createS3URL } = require('./s3')
-const { createClientConfig } = require('./aws')
+const { createClientConfig, createS3URL } = require('./aws')
 
 const defaultSQSClient = new SQSClient({
   region: config.indexerQueueRegion
@@ -14,6 +13,8 @@ const defaultSQSClient = new SQSClient({
  * @param {object} arg
  * @param {string} [arg.eventsTopic] - events pubsub topic - e.g. an AWS SNS TopicArn
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
+ * @param {Logger} [arg.logger] - object to use to log messages
+ * @param {Pick<import('@aws-sdk/client-sqs'),'send'>} [arg.sqsClient] - client to use to invoke commands on AWS SQS
  * @returns {import('aws-lambda').SNSHandler}
  */
 function createBucketToIndexerLambda({

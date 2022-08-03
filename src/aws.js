@@ -26,7 +26,18 @@ function createClientConfig({ topic }) {
   return config
 }
 
+/**
+ * Create a URL that identifies an AWS S3 Bucket/Key
+ * @param {string} bucket - aws s3 bucket name
+ * @param {string} [key] - key in bucket
+ * @returns {URL} URL of key in bucket
+ */
+function createS3URL(bucket, key) {
+  return new URL([`s3://${bucket}`, key].filter(Boolean).join('/'))
+}
+
 module.exports = {
   parseTopic,
-  createClientConfig
+  createClientConfig,
+  createS3URL
 }
