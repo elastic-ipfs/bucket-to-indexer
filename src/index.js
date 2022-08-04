@@ -79,13 +79,12 @@ async function publishToSQS(
  * @param {Date} [arg.startTime] - time of IndexerNotified event
  */
 function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
-  const event = {
+  return {
     type: 'IndexerNotified',
     uri: createS3URL(s3.bucket.name, s3.object.key).toString(),
     byteLength: s3.object.size,
     startTime: startTime.toISOString()
   }
-  return event
 }
 
 /**
@@ -94,12 +93,12 @@ function createIndexerNotifiedEvent({ s3, startTime = new Date() }) {
  * @param {string} [arg.eventsTopic] - topic to publish event on
  * @param {import('@aws-sdk/client-sns').SNSClient} [arg.eventsTopicClient] - client to use to send commands to eventsTopic
  */
-async function emitIpfsEvent({
+function emitIpfsEvent({
   eventsTopicClient,
   eventsTopic = config.eventsTopic,
   event
 }) {
-  await eventsTopicClient.send(
+  return eventsTopicClient.send(
     new PublishCommand({
       TopicArn: eventsTopic,
       Message: JSON.stringify(event)
