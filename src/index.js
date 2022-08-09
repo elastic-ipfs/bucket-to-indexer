@@ -31,17 +31,19 @@ function createBucketToIndexerLambda({
       const records = toS3Event(event, logger)
         .Records.filter((r) => r.eventName.startsWith('ObjectCreated'))
         .filter((r) => r.s3.object.key.endsWith('.car'))
-      for (const record of records) {
+      await Promise.all(records.flatMap(record => {
         const snsMessage = `${record.awsRegion}/${record.s3.bucket.name}/${record.s3.object.key}`
-        await publishToSQS(snsMessage, logger, sqsClient)
-        await emitIpfsEvent({
-          eventsTopicClient,
-          eventsTopic,
-          event: createIndexerNotifiedEvent({
-            s3: record.s3
+        return [
+          publishToSQS(snsMessage, logger, sqsClient),
+          emitIpfsEvent({
+            eventsTopicClient,
+            eventsTopic,
+            event: createIndexerNotifiedEvent({
+              s3: record.s3
+            })
           })
-        })
-      }
+        ]
+      }))
     } catch (e) {
       logger.error(`${serializeError(e)}`)
       throw e
