@@ -15,4 +15,4 @@ _Variables in bold are required._
 | --------------------------- | ------------------ | ------------------------------------------------------------------------------ |
 | SQS_INDEXER_QUEUE_URL       | indexerQueue       | The SQS topic to publish message to indexing subsystem                         |
 
-Also check [AWS specific configuration](https://github.com/elastic-ipfs/elastic-ipfs/blob/main/aws.md).
+Also check [AWS specifics configuration](https://github.com/elastic-ipfs/elastic-ipfs/blob/main/aws.md).
