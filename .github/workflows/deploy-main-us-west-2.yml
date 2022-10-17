@@ -1,5 +1,5 @@
 ---
-name: Build And Deploy (US-WEST-2)
+name: Staging/Prod (US-WEST-2) | Build And Deploy
 on:
   push:
     branches: [main]
